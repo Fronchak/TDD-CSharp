@@ -87,7 +87,7 @@ namespace ClientTDDApi.Tests.Mappers
         {
             string newName = "Carlos";
             string newEmail = "carlos@gmail.com";
-            ClientInputDTO clientInputDTO = new ClientInputDTO()
+            ClientInputDTO clientInputDTO = new ClientInsertDTO()
             {
                 Name = newName,
                 Email = newEmail

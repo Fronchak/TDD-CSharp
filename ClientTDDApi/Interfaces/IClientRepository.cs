@@ -6,6 +6,8 @@ namespace ClientTDDApi.Interfaces
     {
         Task<Client?> FindByIdAsync(int id);
 
+        Client? FindByEmail(string email);
+
         Task<IEnumerable<Client>> FindAllAsync();
 
         void Save(Client client);

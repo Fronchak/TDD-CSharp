@@ -5,7 +5,7 @@ using ClientTDDApi.Interfaces;
 
 namespace ClientTDDApi.Services
 {
-    public class ClientService
+    public class ClientService : IClientService
     {
         private readonly IClientRepository _clientRepository;
         private readonly IClientMapper _clientMapper;
@@ -21,7 +21,7 @@ namespace ClientTDDApi.Services
             Client? client = await _clientRepository.FindByIdAsync(id);
             if(client == null)
             {
-                throw new EntityNotFoundException("");
+                throw new EntityNotFoundException("Client not found");
             }
             return _clientMapper.MapToClientDTO(client);
         }
@@ -46,7 +46,7 @@ namespace ClientTDDApi.Services
             Client? client = await _clientRepository.FindByIdAsync(id);
             if (client == null)
             {
-                throw new EntityNotFoundException("");
+                throw new EntityNotFoundException("Client not found");
             }
             _clientMapper.CopyToClient(clientUpdateDTO, client);
             _clientRepository.Update(client);
@@ -59,7 +59,7 @@ namespace ClientTDDApi.Services
             Client? client = await _clientRepository.FindByIdAsync(id);
             if (client == null)
             {
-                throw new EntityNotFoundException("");
+                throw new EntityNotFoundException("Client not found");
             }
             _clientRepository.Delete(client);
             await _clientRepository.SaveChangesAsync();

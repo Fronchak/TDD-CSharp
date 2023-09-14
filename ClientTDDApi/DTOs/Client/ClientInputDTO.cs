@@ -1,8 +1,16 @@
-﻿namespace ClientTDDApi.DTOs.Client
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ClientTDDApi.DTOs.Client
 {
-    public class ClientInputDTO
+    public abstract class ClientInputDTO : IValidatableObject
     {
-        public string Name { get; set; } = string.Empty;
-        public string Email { get; set; } = string.Empty;
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Name is required")]
+        public string? Name { get; set; }
+
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Email is required")]
+        [RegularExpression("^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$")]
+        public string? Email { get; set; }
+
+        public abstract IEnumerable<ValidationResult> Validate(ValidationContext validationContext);
     }
 }
